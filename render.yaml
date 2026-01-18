@@ -1,0 +1,47 @@
+# Render.com Infrastructure as Code
+# Note: Requires modernization before deployment
+
+services:
+  # Frontend - React Static Site
+  - type: web
+    name: job-harmony-client
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          name: job-harmony-api
+          type: web
+          property: hostport
+
+  # Backend - Express API
+  - type: web
+    name: job-harmony-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false  # Set in Render dashboard
+      - key: SECRET_OR_KEY
+        generateValue: true
+      - key: CORS_ORIGIN
+        fromService:
+          name: job-harmony-client
+          type: web
+          property: host
