@@ -1,165 +1,160 @@
+# Job Harmony
 
-# `Background/Overview`
+A job matching application inspired by dating apps, connecting job seekers with employers through mutual interest-based matching.
 
-"An application resembling Tinder or Bumble that aims to connect people with potential employers based purely on qualifications.
-No picture, no name (initially), just a resume and a proximity to the job in question. Both parties can 'swipe' left or right on each other,
-marking their interest and opening up a dialogue in an instant"
+---
 
-# `Functionality and MVP`
-- Login and Signup functionality for both Employers and Job-Seekers
-    + can sign-up with linkdin or google
-    + enter resume/ position one-page
+## Overview
 
-## Search Functionality
-- Job Seekers set up Preferences
-    + desired pay
-    + location
-    + Field of work
+Job Harmony reimagines the job search experience by removing initial bias from the hiring process. Employers and job seekers are matched based purely on qualifications, skills, and job requirements - no names or photos until both parties express mutual interest.
 
-- Employees make their one-page
-    + what the job pays
-    + location
-    + hours
-    + benefits
-    + requirements (work experience and education)
+### Key Features
 
-- Once preferences set, Users are shown a feed of matched employers/employees which they can mark 'Interested' or 'Not Interested' 
-+ pending section
- 
+- **Anonymous Matching**: Initial profiles show only qualifications and job requirements
+- **Two-Way Interest**: Both employers and job seekers must "like" each other to match
+- **Resume Builder**: Job seekers create structured, searchable resumes
+- **Job Listings**: Employers create "One Pages" with job details
+- **Match Notifications**: Instant alerts when mutual interest is detected
+- **Messaging**: Direct communication after matching
 
-## Alerts/Notification Center for matches 
-+ once matched, job-seeker gets information regarding a phone interview if desired
+---
 
-## User/Employer Ratings and review
-  + previous emplopyees can review jobs, which become public to others considering
-  + Employers can give employees 'compliment' icons
+## Tech Stack
 
-# `Technologies and Technical Challenges`
- + Glassdoor API for ratings
- + Google Maps/GPS API for location service/ Signup/Login
- + Apple Pay/Paypal API for employers' fees (Bonus)
+| Layer | Technology |
+|-------|------------|
+| Frontend | React 16, Redux, React Router |
+| Backend | Node.js, Express |
+| Database | MongoDB (Mongoose ODM) |
+| Authentication | JWT, bcrypt |
+| Styling | CSS3, SCSS |
 
+---
 
-# `Group Members`
-    + Chas
+## Project Structure
 
-    + Luke
+```
+Job-Harmony/
+├── frontend/               # React application
+│   ├── src/
+│   │   ├── actions/        # Redux action creators
+│   │   ├── components/     # React components
+│   │   ├── reducers/       # Redux reducers
+│   │   ├── store/          # Redux store configuration
+│   │   └── util/           # API utilities
+├── models/                 # Mongoose schemas
+├── routes/                 # Express API routes
+│   └── api/
+├── validation/             # Input validation
+├── config/                 # Database & environment config
+├── docs/                   # Documentation
+└── app.js                  # Express server entry
+```
 
-    + Donnie
+---
 
-    + Daniel 
+## Getting Started
 
+### Prerequisites
 
+- Node.js 12.x or higher
+- MongoDB (local or Atlas cluster)
+- npm or yarn
 
-# `Schema`
-    + User
-        - email: String
-        - password: String
-        - fName: String
-        - lName: String
-        - zipCode: Int
-        - role: String
+### Installation
 
-    + matches
-        - employerId: Int
-        - resumeId: Int 
-        
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/Job-Harmony.git
+cd Job-Harmony
 
-    + jobSeekerLikes 
-        - emplyeeId: int
-        - OnepageId: Int 
+# Install dependencies
+npm install
 
-    | emplyeeId | OnepageId |
-    |-----------|-----------|
-    | 1         | 1         |
-    | 1         | 5         |
-    | 6         | 1         |
+# Set up environment variables
+cp config/keys_dev.example.js config/keys_dev.js
+# Edit keys_dev.js with your MongoDB URI and JWT secret
+```
 
+### Running the Application
 
+```bash
+# Development mode (with nodemon)
+npm run dev
 
-    + Resume 
-        -employeeId: Int
-        -jobHistory: textarea
-        -jobField: string
-        -jobSkills: textarea
-        
+# Frontend development
+npm run frontend
 
-    +OnePage
-        -employeeId: Int
-        -companyName: String
-        -description: Text
-        -type: inclusion in: [full-time, part-time, freelance]
-        -remote?: Boolean
-        -benefits: Text
-        -startingPay: Int
+# Both together
+npm run start-dev
+```
 
-    + Matches
-        -employeeId: Int
-        -employerId: Int
-        -date: Date
+---
 
+## API Endpoints
 
-# `State Shape`
-    + entities
-        -users
-        -employers
-        -matches
-        -resumes
-        -onePages
-        
-    + session
-        -currentUser
+### Authentication
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/users/register` | Register new user |
+| POST | `/api/users/login` | Login user |
 
-    + ui
-        -loading
-        -ad
-        -modal
-        -currentlyViewing
-        
-    + errors
-        -session
-    
-# `Frontend Routes`
-TBD
+### Resumes (Job Seekers)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/resumes` | Get all resumes |
+| POST | `/api/resumes` | Create resume |
+| GET | `/api/resumes/:id` | Get resume by ID |
 
+### One Pages (Employers)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/onepages` | Get all job listings |
+| POST | `/api/onepages` | Create job listing |
+| GET | `/api/onepages/:id` | Get listing by ID |
 
-# `Backend Routes`
+### Matches
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/matches` | Create match |
+| GET | `/api/matches/user/:id` | Get user's matches |
+| DELETE | `/api/matches/:id` | Remove match |
 
-`Employee`: 
+---
 
-    - POST "/signup"
-  
-    - POST "/login"
- 
-    - POST "/resumes" - add your resume for consideration
+## Documentation
 
-    - DELETE "/login" (delete session)
+| Document | Description |
+|----------|-------------|
+| [Architecture](./docs/ARCHITECTURE.md) | System design and patterns |
+| [Roadmap](./docs/ROADMAP.md) | Modernization backlog |
+| [Coding Standards](./docs/CODING_STANDARDS.md) | Code style guidelines |
 
-`Employer`: 
+---
 
-    - POST "/signup"
-  
-    - POST "/login"
-  
-    - POST "/pages" - add your resume for consideration
-  
-    - DELETE "/login" (delete session)
+## Status
 
-`Resume`:
+**Current State**: Requires modernization
 
-    - GET "/" - get all
-  
-    - GET "/query?" -get all results within your preferences
- 
-`OnePage`:
+This project was built in 2019 as a group project. It requires:
+- MongoDB Atlas cluster recreation
+- Node.js dependency updates
+- React modernization (16 → 18)
+- Testing infrastructure setup
 
-    - GET "/" - get all
-   
-    - GET "/query?" -get all results within your preferences
-    
-`Match`:
+See [ROADMAP.md](./docs/ROADMAP.md) for detailed modernization plan.
 
-    - POST "/match"
+---
 
-    - DELETE "/match/:id"
+## Original Team
 
+- Daniel Hernandez
+- Chas
+- Luke
+- Donnie
+
+---
+
+## License
+
+MIT License

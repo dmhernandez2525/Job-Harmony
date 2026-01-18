@@ -1,0 +1,49 @@
+# CodeRabbit Configuration
+# https://docs.coderabbit.ai/guides/configure-coderabbit
+
+language: en-US
+
+reviews:
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  path_instructions:
+    - path: "frontend/**/*.js"
+      instructions: |
+        Review React components for:
+        - Proper state management
+        - Component reusability
+        - Performance (unnecessary re-renders)
+        - Accessibility (ARIA, semantic HTML)
+    - path: "frontend/**/*.jsx"
+      instructions: |
+        Review React components for:
+        - Proper state management
+        - Component reusability
+        - Performance (unnecessary re-renders)
+        - Accessibility (ARIA, semantic HTML)
+    - path: "routes/**"
+      instructions: |
+        Review Express routes for:
+        - RESTful conventions
+        - Error handling
+        - Input validation
+        - Authentication middleware
+    - path: "models/**"
+      instructions: |
+        Review Mongoose models for:
+        - Schema validation
+        - Proper indexing
+        - Data integrity
+
+auto_review:
+  enabled: true
+  drafts: false
+  base_branches:
+    - main
+    - develop
+
+chat:
+  auto_reply: true
