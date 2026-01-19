@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from '../../util/withRouter'
 import React from 'react';
 import ResumeForm from './resume_form'
 import { updateResume, fetchResume } from '../../actions/resume_actions'

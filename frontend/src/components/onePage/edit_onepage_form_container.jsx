@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from '../../util/withRouter'
 import React from 'react';
 import OnePageForm from './onepage_form'
 import { updateOnePage, fetchOnePage } from '../../actions/onePage_actions'

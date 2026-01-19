@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PendingIndex from './pending_index';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from '../../util/withRouter';
 import {fetchOnePage} from '../../actions/onePage_actions';
 import {
   receiveNewMain
