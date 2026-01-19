@@ -1,4 +1,3 @@
-const bodyParser = require("body-parser")
 const mongoose = require('mongoose');
 const express = require("express");
 const app = express();
@@ -21,16 +20,22 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   })
 }
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+
+// Use Express built-in middleware instead of body-parser
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// Connect to MongoDB (Mongoose 8.x - no deprecated options needed)
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB successfully'))
-    .catch(err => console.log(err));
-    // /5d83ade24f458a13abe6d572
+  .connect(db)
+  .then(() => console.log('Connected to MongoDB successfully'))
+  .catch(err => console.log(err));
+
 app.use(passport.initialize());
 require('./config/passport')(passport);
+
 const port = process.env.PORT || 5000;
+
 app.use("/api/resumes", resumes);
 app.use("/api/preferences", preferences);
 app.use("/api/onePages", onePages);
@@ -41,7 +46,4 @@ app.use("/api/matchers", matchers);
 app.use("/api/seeds", seeds);
 app.use(express.static('public'))
 
-
-
 app.listen(port, () => console.log(`Server is running on port ${port}`));
-
