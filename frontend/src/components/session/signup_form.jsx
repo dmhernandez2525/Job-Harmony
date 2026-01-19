@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from '../util/withRouter';
+import { withRouter } from '../../util/withRouter';
 class SignupForm extends React.Component {
   constructor(props) {
     super(props);

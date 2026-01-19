@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from '../util/withRouter';
+import { withRouter } from '../../util/withRouter';
 import { fetchAllOnePages } from '../../actions/onePage_actions';
 import UserShow from './user_show'
 

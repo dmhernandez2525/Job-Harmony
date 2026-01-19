@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from '../util/withRouter'
+import { withRouter } from '../../util/withRouter'
 
 class ResumeForm extends React.Component {
   constructor(props) {
