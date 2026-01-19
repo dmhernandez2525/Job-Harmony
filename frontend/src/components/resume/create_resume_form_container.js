@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ResumeForm from './resume_form';
 import { createResume } from '../../actions/resume_actions';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from '../util/withRouter'
 
 
 const mapStateToProps = (state) => ({

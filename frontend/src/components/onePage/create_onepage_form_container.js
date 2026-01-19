@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import OnePageForm from './onepage_form';
 import { createOnePage } from '../../actions/onePage_actions';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from '../util/withRouter'
 
 
 const mapStateToProps = (state) => ({

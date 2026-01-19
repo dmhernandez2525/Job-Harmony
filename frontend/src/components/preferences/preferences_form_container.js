@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from '../util/withRouter';
 import { fetchRelevantOnePages } from '../../actions/onePage_actions'
 import { fetchPreference, createPreference, updatePreference } from '../../actions/preferences_actions';
 import PreferencesForm from './preferences_form';
