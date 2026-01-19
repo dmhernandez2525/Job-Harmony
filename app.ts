@@ -1,10 +1,9 @@
-import mongoose from 'mongoose';
 import express, { Application, Request, Response } from 'express';
 import passport from 'passport';
 import path from 'path';
 
-import keys from './config/keys';
 import configurePassport from './config/passport';
+import { connectToMongoDB, getDatabaseHealth } from './utils/database';
 
 // Import Models first (to register them)
 import './models/User';
@@ -42,14 +41,21 @@ if (process.env.NODE_ENV === 'production') {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Connect to MongoDB
-mongoose
-  .connect(keys.mongoURI)
-  .then(() => console.log('Connected to MongoDB successfully'))
-  .catch(err => console.log(err));
+// Connect to MongoDB (graceful - server continues if connection fails)
+connectToMongoDB();
 
 app.use(passport.initialize());
 configurePassport(passport);
+
+// Health check endpoint for Render
+app.get('/api/health', (req: Request, res: Response) => {
+  const dbHealth = getDatabaseHealth();
+  res.status(200).json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    database: dbHealth
+  });
+});
 
 const port = process.env.PORT || 5000;
 
