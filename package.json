@@ -1,45 +1,41 @@
 {
   "name": "job_harmony",
   "version": "1.0.0",
-  "description": "\"An application resembling Tinder or Bumble that aims to connect people with potential employers based purely on qualifications. No picture, no name (initially), just a resume and a proximity to the job in question. Both parties can 'swipe' left or right on each other, marking their interest and opening up a dialogue in an instant\"",
+  "description": "An application resembling Tinder or Bumble that aims to connect people with potential employers based purely on qualifications.",
   "main": "app.js",
   "scripts": {
-    "server:debug": "nodemon --inspect app.js app.js",
+    "server:debug": "nodemon --inspect app.js",
     "server": "nodemon app.js",
     "start": "node app.js",
     "frontend-install": "npm install --prefix frontend",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "dev": "concurrently \"npm run server\" \"npm run frontend\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DonaldBatryn/Job-Harmony.git"
+    "url": "git+https://github.com/dmhernandez2525/Job-Harmony.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DonaldBatryn/Job-Harmony/issues"
+    "url": "https://github.com/dmhernandez2525/Job-Harmony/issues"
   },
-  "homepage": "https://github.com/DonaldBatryn/Job-Harmony#readme",
+  "homepage": "https://github.com/dmhernandez2525/Job-Harmony#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "concurrently": "^4.1.2",
-    "express": "^4.17.1",
-    "faker": "^4.1.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.1",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "redux-responsive": "^4.3.8",
-    "validator": "^11.1.0"
+    "concurrently": "^9.1.2",
+    "express": "^4.21.2",
+    "@faker-js/faker": "^9.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "validator": "^13.12.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2"
+    "nodemon": "^3.1.9"
   },
   "engines": {
-    "node": "12.7.0",
-    "npm": "6.10.0"
+    "node": ">=20.0.0"
   }
 }
