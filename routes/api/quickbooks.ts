@@ -267,16 +267,17 @@ router.get('/purchase-orders', authenticate, async (req: Request, res: Response)
 router.delete('/purchase-orders/:qbId', authenticate, async (req: Request, res: Response) => {
   try {
     const service = getQuickBooksService();
+    const qbId = req.params.qbId as string;
 
     if (!service.isAuthenticated()) {
       return res.status(401).json({ error: 'Not connected to QuickBooks' });
     }
 
-    await service.deletePurchaseOrder(req.params.qbId);
+    await service.deletePurchaseOrder(qbId);
 
     // Also update local record to remove QuickBooks reference
     await PurchaseOrder.findOneAndUpdate(
-      { quickbooksId: req.params.qbId },
+      { quickbooksId: qbId },
       { $unset: { quickbooksId: 1, quickbooksSyncedAt: 1 } }
     );
 
