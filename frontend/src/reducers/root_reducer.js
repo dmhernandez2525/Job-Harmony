@@ -1,8 +1,7 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import session from './session_reducer';
 import errors from './errors_reducer';
 import ui from './ui_reducer';
-import {responsiveStateReducer} from 'redux-responsive';
 import entities from './entities_reducer';
 
 const RootReducer = combineReducers({
@@ -10,7 +9,6 @@ const RootReducer = combineReducers({
   session,
   ui,
   errors,
-  browser: responsiveStateReducer
 });
 
 export default RootReducer;

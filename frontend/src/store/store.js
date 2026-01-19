@@ -1,18 +1,15 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-import {responsiveStoreEnhancer} from 'redux-responsive';
+import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from '../reducers/root_reducer';
 
-const configureStore = (preloadedState = {}) => (
-  createStore(
-    rootReducer,
+const createStore = (preloadedState = {}) =>
+  configureStore({
+    reducer: rootReducer,
     preloadedState,
-    compose(
-      responsiveStoreEnhancer,
-      applyMiddleware(thunk, logger)
-    )
-  )
-);
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
+    devTools: import.meta.env.MODE !== 'production',
+  });
 
-export default configureStore;
+export default createStore;
