@@ -1,6 +1,7 @@
 import React from 'react'
 import avatar from '../../images/avatar.png'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { withRouter } from '../../util/withRouter'
 
 class UserShow extends React.Component{
     constructor(props){

@@ -1,4 +1,5 @@
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withRouter } from '../../util/withRouter';
 import React from 'react';
 
 
