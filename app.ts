@@ -13,10 +13,13 @@ import './models/OnePage';
 import './models/Preference';
 import './models/Like';
 import './models/Match';
+import './models/PurchaseOrder';
 
 // Import Routes
 import users from './routes/api/users';
 import resumes from './routes/api/resumes';
+import purchaseOrders from './routes/api/purchaseOrders';
+import quickbooks from './routes/api/quickbooks';
 
 // For backward compatibility, keep JS routes working
 const likes = require('./routes/api/likes');
@@ -59,6 +62,8 @@ app.use('/api/matches', matches);
 app.use('/api/likes', likes);
 app.use('/api/matchers', matchers);
 app.use('/api/seeds', seeds);
+app.use('/api/purchase-orders', purchaseOrders);
+app.use('/api/quickbooks', quickbooks);
 app.use(express.static('public'));
 
 // Only start server if not in test mode

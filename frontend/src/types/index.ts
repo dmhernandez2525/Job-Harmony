@@ -169,3 +169,140 @@ export interface WithRouterProps {
     params: Record<string, string>;
   };
 }
+
+// Purchase Order Types
+export type PurchaseOrderStatus =
+  | 'draft'
+  | 'pending_approval'
+  | 'approved'
+  | 'ordered'
+  | 'partially_received'
+  | 'received'
+  | 'cancelled';
+
+export type VendorType = 'amazon' | 'mcmaster-carr' | 'digikey' | 'cdw' | 'other';
+
+export interface PurchaseOrderLineItem {
+  lineNumber: number;
+  partNumber: string;
+  description: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
+  vendorPartNumber?: string;
+  leadTime?: string;
+  category?: string;
+}
+
+export interface ShippingAddress {
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+}
+
+export interface PurchaseOrder {
+  _id: string;
+  poNumber: string;
+  vendorName: string;
+  vendorType: VendorType;
+  vendorOrderNumber?: string;
+  status: PurchaseOrderStatus;
+  createdBy: User | string;
+  approvedBy?: User | string;
+  department?: string;
+  projectCode?: string;
+  lineItems: PurchaseOrderLineItem[];
+  subtotal: number;
+  tax: number;
+  shipping: number;
+  total: number;
+  notes?: string;
+  shippingAddress?: ShippingAddress;
+  quickbooksId?: string;
+  quickbooksSyncedAt?: string;
+  orderDate?: string;
+  expectedDeliveryDate?: string;
+  actualDeliveryDate?: string;
+  trackingNumbers?: string[];
+  attachments?: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PurchaseOrderFormData {
+  vendorName: string;
+  vendorType: VendorType;
+  department?: string;
+  projectCode?: string;
+  lineItems: Omit<PurchaseOrderLineItem, 'lineNumber'>[];
+  tax?: number;
+  shipping?: number;
+  notes?: string;
+  shippingAddress?: ShippingAddress;
+}
+
+export interface PurchaseOrderFilter {
+  status?: PurchaseOrderStatus | PurchaseOrderStatus[];
+  vendorType?: VendorType | VendorType[];
+  vendorName?: string;
+  department?: string;
+  projectCode?: string;
+  minTotal?: number;
+  maxTotal?: number;
+  startDate?: string;
+  endDate?: string;
+  search?: string;
+  hasQuickbooksSync?: boolean;
+}
+
+export interface PurchaseOrderPagination {
+  page: number;
+  limit: number;
+  total: number;
+  pages: number;
+}
+
+// Vendor Product Types
+export interface VendorProductSearchResult {
+  partNumber: string;
+  vendorPartNumber: string;
+  description: string;
+  unitPrice: number;
+  currency: string;
+  availability: 'in_stock' | 'limited' | 'out_of_stock' | 'unknown';
+  leadTime?: string;
+  minimumQuantity?: number;
+  category?: string;
+  manufacturer?: string;
+  imageUrl?: string;
+  productUrl?: string;
+}
+
+// Analytics Types
+export interface PurchaseOrderAnalytics {
+  statusSummary: { _id: PurchaseOrderStatus; count: number; total: number }[];
+  vendorSummary: { _id: VendorType; count: number; total: number }[];
+  monthlySummary: { _id: { year: number; month: number }; count: number; total: number }[];
+  totals: {
+    totalOrders: number;
+    totalValue: number;
+    avgOrderValue: number;
+  };
+}
+
+// QuickBooks Types
+export interface QuickBooksStatus {
+  isConnected: boolean;
+  hasTokens: boolean;
+  environment: 'sandbox' | 'production';
+  companyInfo?: {
+    companyName: string;
+    companyId: string;
+    country: string;
+  };
+}
+
+// Theme Types
+export type Theme = 'light' | 'dark' | 'system';
