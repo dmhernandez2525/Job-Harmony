@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from '../util/withRouter';
+import { withRouter } from '../../util/withRouter';
 import Buttons from './buttons';
 import { fetchUser, fetchUsers } from '../../actions/user_actions';
 

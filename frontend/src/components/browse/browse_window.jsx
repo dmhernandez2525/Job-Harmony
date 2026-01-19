@@ -1,6 +1,6 @@
 import React from 'react';
 // import BrowseShow from './browse_show';
-// import { withRouter } from '../util/withRouter';
+// import { withRouter } from '../../util/withRouter';
 import OnePageDetail from './onepage_detail';
 import EndOfResults from './end_of_results';
 
