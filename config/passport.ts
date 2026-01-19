@@ -1,10 +1,8 @@
 import { Strategy as JwtStrategy, ExtractJwt, StrategyOptions, VerifiedCallback } from 'passport-jwt';
 import { PassportStatic } from 'passport';
-import mongoose from 'mongoose';
 import keys from './keys';
-import { IJwtPayload, IUser } from '../types';
-
-const User = mongoose.model<IUser>('users');
+import { IJwtPayload } from '../types';
+import User from '../models/User';
 
 const options: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
