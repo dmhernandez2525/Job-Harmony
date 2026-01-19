@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from '../../util/withRouter'
 class OnePageForm extends React.Component {
   constructor(props) {
     super(props);

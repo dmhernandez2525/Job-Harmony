@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from '../../util/withRouter';
 import BrowseWindow from './browse_window'
 import {
     // fetchAllOnePages,

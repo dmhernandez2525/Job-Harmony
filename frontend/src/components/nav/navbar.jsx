@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom'
-import logo from '../../images/jobHarmonyLogo.png'
+import { Link } from 'react-router-dom';
+import { withRouter } from '../../util/router_hooks';
+import logo from '../../images/jobHarmonyLogo.png';
 
 
 class NavBar extends React.Component {

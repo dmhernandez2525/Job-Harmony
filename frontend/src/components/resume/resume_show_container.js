@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router';
+import { withRouter } from '../../util/withRouter';
 import ResumeShow from './resume_show'
 import { updateResume, fetchResume } from '../../actions/resume_actions'
 const msp = (state, ownProps) => {

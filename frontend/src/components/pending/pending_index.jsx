@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from '../../util/withRouter';
 import PendingIndexItem from './pending_index_item';
 
 class PendingIndex extends React.Component{
