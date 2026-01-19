@@ -6,20 +6,20 @@ const Resume = require("../../models/Resume")
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose');
 const db = require('../../config/keys').mongoURI;
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 
-const randomFirstName = faker.name.firstName; // Rowan
-const  randomLastName = faker.name.lastName; // Nikolaus
-const  randomEmail = faker.internet.email; 
-const randomZipCode = faker.address.zipCode;
-const randomParagraph = faker.lorem.paragraph;
-const randomCompanyLogo = faker.image.business;
-const randomCompanyCatchPhrase = faker.company.catchPhrase;
-const randomCompanyName = faker.company.companyName;
-const randomEmployerImage = faker.image.avatar;
-const randomEmployerJobTitle = faker.name.jobTitle;
-const randomEmployerJobDescriptor = faker.name.jobDescriptor;
-const randomEmployerJobPay = faker.random.number;
+const randomFirstName = () => faker.person.firstName();
+const randomLastName = () => faker.person.lastName();
+const randomEmail = () => faker.internet.email();
+const randomZipCode = () => faker.location.zipCode();
+const randomParagraph = () => faker.lorem.paragraph();
+const randomCompanyLogo = () => faker.image.urlLoremFlickr({ category: 'business' });
+const randomCompanyCatchPhrase = () => faker.company.catchPhrase();
+const randomCompanyName = () => faker.company.name();
+const randomEmployerImage = () => faker.image.avatar();
+const randomEmployerJobTitle = () => faker.person.jobTitle();
+const randomEmployerJobDescriptor = () => faker.person.jobDescriptor();
+const randomEmployerJobPay = () => faker.number.int({ min: 30000, max: 200000 });
 
 
 
