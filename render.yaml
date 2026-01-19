@@ -1,15 +1,17 @@
 # Render.com Infrastructure as Code
-# Note: Requires modernization before deployment
+# Cost: $0/month (Free tier)
+# Note: Free web services spin down after 15 min inactivity
+# Note: Backend requires MongoDB - use MongoDB Atlas free tier (M0)
 
 services:
-  # Frontend - React Static Site
+  # Frontend - React/Vite Static Site (FREE)
   - type: web
     name: job-harmony-client
     runtime: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/build
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: frontend/dist
     headers:
-      - path: /*
+      - path: /assets/*
         name: Cache-Control
         value: public, max-age=31536000, immutable
     routes:
@@ -17,31 +19,25 @@ services:
         source: /*
         destination: /index.html
     envVars:
-      - key: REACT_APP_API_URL
-        fromService:
-          name: job-harmony-api
-          type: web
-          property: hostport
+      - key: VITE_API_URL
+        sync: false
 
-  # Backend - Express API
+  # Backend - Express/TypeScript API (FREE)
   - type: web
     name: job-harmony-api
     runtime: node
     plan: free
-    buildCommand: npm install
+    buildCommand: npm ci && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 5000
+        value: "10000"
       - key: MONGO_URI
-        sync: false  # Set in Render dashboard
+        sync: false
       - key: SECRET_OR_KEY
         generateValue: true
       - key: CORS_ORIGIN
-        fromService:
-          name: job-harmony-client
-          type: web
-          property: host
+        sync: false
