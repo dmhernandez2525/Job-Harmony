@@ -10,7 +10,7 @@ services:
     name: job-harmony-site
     runtime: static
     buildCommand: cd frontend && npm ci && npm run build
-    staticPublishPath: frontend/dist
+    staticPublishPath: frontend/build
     headers:
       - path: /assets/*
         name: Cache-Control
