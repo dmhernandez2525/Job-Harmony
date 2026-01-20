@@ -7,7 +7,7 @@
 services:
   # Frontend - React/Vite Static Site (FREE)
   - type: web
-    name: job-harmony-client
+    name: job-harmony-site
     runtime: static
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: frontend/dist
