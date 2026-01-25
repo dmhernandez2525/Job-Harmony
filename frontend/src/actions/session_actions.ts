@@ -65,7 +65,10 @@ export const signup = (user: SignupCredentials) => (dispatch: Dispatch<SessionAc
       dispatch(receiveCurrentUser(decoded));
     })
     .catch(err => {
-      dispatch(receiveErrors(err.response.data));
+      const errorData = err.response?.data || {
+        message: 'Unable to connect to server. The backend API may be unavailable.'
+      };
+      dispatch(receiveErrors(errorData));
     });
 };
 
@@ -79,7 +82,10 @@ export const login = (user: LoginCredentials) => (dispatch: Dispatch<SessionActi
       dispatch(receiveCurrentUser(decoded));
     })
     .catch(err => {
-      dispatch(receiveErrors(err.response.data));
+      const errorData = err.response?.data || {
+        message: 'Unable to connect to server. The backend API may be unavailable.'
+      };
+      dispatch(receiveErrors(errorData));
     })
 );
 
