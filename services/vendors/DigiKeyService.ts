@@ -4,7 +4,9 @@ import {
   VendorProductSearchResult,
   VendorOrderRequest,
   VendorOrderResponse,
-  VendorOrderStatus
+  VendorOrderStatus,
+  PricingTier,
+  calculateTieredPrice
 } from './BaseVendorService';
 
 /**
@@ -39,6 +41,15 @@ export class DigiKeyService extends BaseVendorService {
     sandbox: 'https://sandbox-api.digikey.com',
     production: 'https://api.digikey.com'
   };
+
+  private static readonly PRICING_TIERS: PricingTier[] = [
+    { minQuantity: 1000, unitPrice: 0.35 },
+    { minQuantity: 500, unitPrice: 0.42 },
+    { minQuantity: 100, unitPrice: 0.55 },
+    { minQuantity: 25, unitPrice: 0.72 },
+    { minQuantity: 10, unitPrice: 0.85 },
+  ];
+  private static readonly DEFAULT_UNIT_PRICE = 1.00;
 
   constructor(config: DigiKeyConfig) {
     super('digikey', 'DigiKey', config);
@@ -208,13 +219,11 @@ export class DigiKeyService extends BaseVendorService {
     // DigiKey has extensive price breaks based on quantity
 
     return items.map(item => {
-      // Simulate DigiKey's quantity-based pricing
-      let unitPrice = 1.00;
-      if (item.quantity >= 1000) unitPrice = 0.35;
-      else if (item.quantity >= 500) unitPrice = 0.42;
-      else if (item.quantity >= 100) unitPrice = 0.55;
-      else if (item.quantity >= 25) unitPrice = 0.72;
-      else if (item.quantity >= 10) unitPrice = 0.85;
+      const unitPrice = calculateTieredPrice(
+        item.quantity,
+        DigiKeyService.PRICING_TIERS,
+        DigiKeyService.DEFAULT_UNIT_PRICE
+      );
 
       return {
         vendorPartNumber: item.vendorPartNumber,
@@ -241,15 +250,14 @@ export class DigiKeyService extends BaseVendorService {
     // POST {baseUrl}/Ordering/v3/Orders
     // DigiKey supports both API ordering and EDI
 
-    // Calculate mock total with quantity pricing
-    let total = 0;
-    for (const item of orderRequest.items) {
-      let unitPrice = 1.00;
-      if (item.quantity >= 100) unitPrice = 0.55;
-      else if (item.quantity >= 25) unitPrice = 0.72;
-      else if (item.quantity >= 10) unitPrice = 0.85;
-      total += unitPrice * item.quantity;
-    }
+    const total = orderRequest.items.reduce((sum, item) => {
+      const unitPrice = calculateTieredPrice(
+        item.quantity,
+        DigiKeyService.PRICING_TIERS,
+        DigiKeyService.DEFAULT_UNIT_PRICE
+      );
+      return sum + unitPrice * item.quantity;
+    }, 0);
 
     return {
       success: true,

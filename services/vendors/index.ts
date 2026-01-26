@@ -11,47 +11,30 @@ import { DigiKeyService, createDigiKeyService } from './DigiKeyService';
 import { CDWService, createCDWService } from './CDWService';
 import { VendorType } from '../../models/PurchaseOrder';
 
-/**
- * Vendor Service Factory
- * Creates and manages vendor service instances
- */
+type ServiceFactory = () => BaseVendorService;
+
+const vendorFactories: Record<string, ServiceFactory> = {
+  'amazon': createAmazonBusinessService,
+  'mcmaster-carr': createMcMasterCarrService,
+  'digikey': createDigiKeyService,
+  'cdw': createCDWService,
+};
+
 export class VendorServiceFactory {
   private static instances: Map<VendorType, BaseVendorService> = new Map();
 
-  /**
-   * Get or create a vendor service instance
-   */
   static getService(vendorType: VendorType): BaseVendorService | null {
-    // Check if we have a cached instance
     if (this.instances.has(vendorType)) {
       return this.instances.get(vendorType)!;
     }
 
-    // Create new instance based on vendor type
-    let service: BaseVendorService | null = null;
-
-    switch (vendorType) {
-      case 'amazon':
-        service = createAmazonBusinessService();
-        break;
-      case 'mcmaster-carr':
-        service = createMcMasterCarrService();
-        break;
-      case 'digikey':
-        service = createDigiKeyService();
-        break;
-      case 'cdw':
-        service = createCDWService();
-        break;
-      case 'other':
-        // No service for "other" vendors
-        return null;
+    const factory = vendorFactories[vendorType];
+    if (!factory) {
+      return null;
     }
 
-    if (service) {
-      this.instances.set(vendorType, service);
-    }
-
+    const service = factory();
+    this.instances.set(vendorType, service);
     return service;
   }
 

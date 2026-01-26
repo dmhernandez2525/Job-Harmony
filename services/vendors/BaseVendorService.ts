@@ -81,6 +81,23 @@ export interface VendorConfig {
 }
 
 /**
+ * Pricing tier for quantity-based discounts
+ */
+export interface PricingTier {
+  minQuantity: number;
+  unitPrice: number;
+}
+
+/**
+ * Calculate unit price from quantity tiers.
+ * Tiers should be sorted by minQuantity in descending order.
+ */
+export function calculateTieredPrice(quantity: number, tiers: PricingTier[], defaultPrice: number): number {
+  const tier = tiers.find(t => quantity >= t.minQuantity);
+  return tier?.unitPrice ?? defaultPrice;
+}
+
+/**
  * Abstract Base Vendor Service
  * All vendor integrations should extend this class
  */

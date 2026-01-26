@@ -4,7 +4,9 @@ import {
   VendorProductSearchResult,
   VendorOrderRequest,
   VendorOrderResponse,
-  VendorOrderStatus
+  VendorOrderStatus,
+  PricingTier,
+  calculateTieredPrice
 } from './BaseVendorService';
 
 /**
@@ -24,6 +26,13 @@ export interface McMasterCarrConfig extends VendorConfig {
 export class McMasterCarrService extends BaseVendorService {
   private mcmasterConfig: McMasterCarrConfig;
   private readonly baseUrl = 'https://www.mcmaster.com';
+
+  private static readonly PRICING_TIERS: PricingTier[] = [
+    { minQuantity: 100, unitPrice: 12.99 },
+    { minQuantity: 50, unitPrice: 13.99 },
+    { minQuantity: 25, unitPrice: 14.49 },
+  ];
+  private static readonly DEFAULT_UNIT_PRICE = 15.99;
 
   constructor(config: McMasterCarrConfig) {
     super('mcmaster-carr', 'McMaster-Carr', config);
@@ -157,11 +166,11 @@ export class McMasterCarrService extends BaseVendorService {
     // Volume discounts may apply for large quantities
 
     return items.map(item => {
-      // McMaster-Carr often has quantity breaks
-      let unitPrice = 15.99;
-      if (item.quantity >= 100) unitPrice = 12.99;
-      else if (item.quantity >= 50) unitPrice = 13.99;
-      else if (item.quantity >= 25) unitPrice = 14.49;
+      const unitPrice = calculateTieredPrice(
+        item.quantity,
+        McMasterCarrService.PRICING_TIERS,
+        McMasterCarrService.DEFAULT_UNIT_PRICE
+      );
 
       return {
         vendorPartNumber: item.vendorPartNumber,

@@ -4,7 +4,9 @@ import {
   VendorProductSearchResult,
   VendorOrderRequest,
   VendorOrderResponse,
-  VendorOrderStatus
+  VendorOrderStatus,
+  PricingTier,
+  calculateTieredPrice
 } from './BaseVendorService';
 
 /**
@@ -33,6 +35,14 @@ export interface CDWCategory {
 export class CDWService extends BaseVendorService {
   private cdwConfig: CDWConfig;
   private readonly baseUrl = 'https://api.cdw.com';
+
+  private static readonly PRICING_TIERS: PricingTier[] = [
+    { minQuantity: 50, unitPrice: 249.99 },
+    { minQuantity: 25, unitPrice: 269.99 },
+    { minQuantity: 10, unitPrice: 284.99 },
+    { minQuantity: 5, unitPrice: 294.99 },
+  ];
+  private static readonly DEFAULT_UNIT_PRICE = 299.99;
 
   constructor(config: CDWConfig) {
     super('cdw', 'CDW', config);
@@ -166,12 +176,11 @@ export class CDWService extends BaseVendorService {
     // CDW often has account-specific pricing and volume discounts
 
     return items.map(item => {
-      // Simulate CDW's volume-based pricing
-      let unitPrice = 299.99;
-      if (item.quantity >= 50) unitPrice = 249.99;
-      else if (item.quantity >= 25) unitPrice = 269.99;
-      else if (item.quantity >= 10) unitPrice = 284.99;
-      else if (item.quantity >= 5) unitPrice = 294.99;
+      const unitPrice = calculateTieredPrice(
+        item.quantity,
+        CDWService.PRICING_TIERS,
+        CDWService.DEFAULT_UNIT_PRICE
+      );
 
       return {
         vendorPartNumber: item.vendorPartNumber,
