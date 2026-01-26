@@ -85,6 +85,8 @@
 #     driver: bridge
 # volumes:
 #   mongo-db:
+name: job-harmony
+
 version: "3"
 services:
   mongo:
