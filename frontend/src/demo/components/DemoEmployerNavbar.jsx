@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDemoContext } from '../DemoContext';
 import logo from '../../images/jobHarmonyLogo.png';
 
-const DemoNavbar = () => {
-  const { user, exitDemo: exitDemoContext } = useDemoContext();
+const DemoEmployerNavbar = () => {
+  const { user, exitDemo } = useDemoContext();
   const [dropdown, setDropdown] = useState('dropdown-hidden');
   const containerRef = useRef(null);
   const navigate = useNavigate();
@@ -26,24 +26,27 @@ const DemoNavbar = () => {
   };
 
   const handleExitDemo = () => {
-    exitDemoContext();
+    exitDemo();
     navigate('/');
   };
 
   return (
     <div className="nav-bar-user">
       <div className="navbar-left">
-        <Link className="nav-image" to="/demo">
+        <Link className="nav-image" to="/demo/employer">
           <img className="nav-image" src={logo} alt="Job Harmony Logo" />
         </Link>
-        <span className="badge-primary ml-2 text-xs">DEMO MODE</span>
+        <span className="badge-employer ml-2 text-xs">EMPLOYER DEMO</span>
       </div>
       <div className="navbar-right">
-        <Link to="/demo/profile">
-          <button className="session-btn my-profile-btn">My Profile</button>
+        <Link to="/demo/employer">
+          <button className="session-btn my-profile-btn">Dashboard</button>
         </Link>
-        <Link to="/demo/matches">
-          <button className="session-btn my-matches-btn">My Matches</button>
+        <Link to="/demo/employer/applications">
+          <button className="session-btn my-matches-btn">Applications</button>
+        </Link>
+        <Link to="/demo/employer/candidates">
+          <button className="session-btn">Candidates</button>
         </Link>
         <div className="user-name-bar" onClick={toggleDropdown}>
           <span className="username-btn">{user.fName}</span>
@@ -54,22 +57,17 @@ const DemoNavbar = () => {
             <span onClick={toggleDropdown} className="dropdown-items">
               <li className="drop-list-item">
                 <button className="logout-btn">
-                  <Link to="/demo">Browse Jobs</Link>
+                  <Link to="/demo/employer">Dashboard</Link>
                 </button>
               </li>
               <li className="drop-list-item">
                 <button className="logout-btn">
-                  <Link to="/demo/profile">Profile</Link>
+                  <Link to="/demo/employer/applications">Applications</Link>
                 </button>
               </li>
               <li className="drop-list-item">
                 <button className="logout-btn">
-                  <Link to="/demo/applications">Applications</Link>
-                </button>
-              </li>
-              <li className="drop-list-item">
-                <button className="logout-btn">
-                  <Link to="/demo/resume">Resume</Link>
+                  <Link to="/demo/employer/candidates">Candidates</Link>
                 </button>
               </li>
               <li className="drop-list-item">
@@ -81,8 +79,22 @@ const DemoNavbar = () => {
           </div>
         </ul>
       </div>
+      <style>{`
+        .badge-employer {
+          display: inline-block;
+          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          color: white;
+          padding: 0.25rem 0.75rem;
+          border-radius: 9999px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-left: 0.5rem;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default DemoNavbar;
+export default DemoEmployerNavbar;

@@ -1,8 +1,14 @@
 // Demo data for showcasing Job-Harmony features without authentication
 
-export const demoUser = {
-  id: 'demo-user-1',
-  email: 'demo@jobharmony.com',
+// Check if demo mode is enabled via environment variable
+export const isDemoModeEnabled = () => {
+  return import.meta.env.VITE_DEMO_MODE === 'true';
+};
+
+// Demo user for Candidate/Job-Seeker role
+export const demoCandidateUser = {
+  id: 'demo-candidate-1',
+  email: 'candidate@jobharmony.demo',
   fName: 'Alex',
   lName: 'Demo',
   role: 'Job-Seeker',
@@ -16,6 +22,23 @@ export const demoUser = {
   },
   pendingOnePages: []
 };
+
+// Demo user for Employer role
+export const demoEmployerUser = {
+  id: 'demo-employer-1',
+  email: 'employer@jobharmony.demo',
+  fName: 'Sarah',
+  lName: 'Hiring',
+  role: 'Employer',
+  companyName: 'TechVentures Inc.',
+  zipCode: '94102',
+  date: new Date().toISOString(),
+  jobListings: [],
+  pendingOnePages: []
+};
+
+// Legacy export for backward compatibility
+export const demoUser = demoCandidateUser;
 
 export const demoResume = {
   _id: 'demo-resume-1',
@@ -156,5 +179,101 @@ export const demoApplications = [
     status: 'pending',
     appliedDate: '2024-01-18',
     notes: 'Application submitted'
+  }
+];
+
+// --- Employer Demo Data ---
+
+// Candidates that have applied to the employer's job listings
+export const demoCandidates = [
+  {
+    _id: 'candidate-1',
+    fName: 'Jordan',
+    lName: 'Smith',
+    email: 'jordan.smith@email.com',
+    resume: {
+      jobHistory: 'Software Engineer at Google (2021-2024)\nJunior Developer at Startup (2019-2021)',
+      jobField: 'Technology',
+      jobSkills: 'React, TypeScript, Node.js, GraphQL, AWS'
+    },
+    matchScore: 92
+  },
+  {
+    _id: 'candidate-2',
+    fName: 'Morgan',
+    lName: 'Chen',
+    email: 'morgan.chen@email.com',
+    resume: {
+      jobHistory: 'Full Stack Developer at Amazon (2020-2024)\nWeb Developer at Agency (2018-2020)',
+      jobField: 'Technology',
+      jobSkills: 'JavaScript, React, Python, PostgreSQL, Docker'
+    },
+    matchScore: 87
+  },
+  {
+    _id: 'candidate-3',
+    fName: 'Taylor',
+    lName: 'Johnson',
+    email: 'taylor.j@email.com',
+    resume: {
+      jobHistory: 'Frontend Engineer at Meta (2022-2024)\nUI Developer at Design Studio (2020-2022)',
+      jobField: 'Technology',
+      jobSkills: 'React, Vue, CSS, Figma, TypeScript'
+    },
+    matchScore: 85
+  }
+];
+
+// Applications received by the employer
+export const demoReceivedApplications = [
+  {
+    _id: 'recv-app-1',
+    candidate: demoCandidates[0],
+    jobListing: demoJobListings[0],
+    status: 'interview_scheduled',
+    appliedDate: '2024-01-12',
+    interviewDate: '2024-01-22',
+    notes: 'Strong candidate, scheduled technical interview'
+  },
+  {
+    _id: 'recv-app-2',
+    candidate: demoCandidates[1],
+    jobListing: demoJobListings[0],
+    status: 'application_reviewed',
+    appliedDate: '2024-01-14',
+    notes: 'Good experience, reviewing portfolio'
+  },
+  {
+    _id: 'recv-app-3',
+    candidate: demoCandidates[2],
+    jobListing: demoJobListings[0],
+    status: 'pending',
+    appliedDate: '2024-01-16',
+    notes: 'New application'
+  }
+];
+
+// Employer's job listings (subset they own)
+export const demoEmployerJobListings = [
+  demoJobListings[0], // Senior Frontend Developer at TechVentures Inc.
+];
+
+// Employer matches (candidates who matched with their listings)
+export const demoEmployerMatches = [
+  {
+    _id: 'emp-match-1',
+    candidate: demoCandidates[0],
+    jobListing: demoJobListings[0],
+    matchScore: 92,
+    matchedSkills: ['React', 'TypeScript', 'GraphQL'],
+    status: 'mutual_interest'
+  },
+  {
+    _id: 'emp-match-2',
+    candidate: demoCandidates[1],
+    jobListing: demoJobListings[0],
+    matchScore: 87,
+    matchedSkills: ['React', 'JavaScript', 'Docker'],
+    status: 'employer_interested'
   }
 ];
