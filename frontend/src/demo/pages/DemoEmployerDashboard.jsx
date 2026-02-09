@@ -14,59 +14,59 @@ const DemoEmployerDashboard = () => {
   const interviewCount = receivedApplications.filter(a => a.status === 'interview_scheduled').length;
 
   return (
-    <div className="dashboard-container p-6 max-w-6xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">Employer Dashboard</h1>
-        <p className="text-secondary-600">
+    <div className="dashboard-container p-4 md:p-6 max-w-6xl mx-auto">
+      <div className="mb-4 md:mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Employer Dashboard</h1>
+        <p className="text-secondary-600 text-sm md:text-base">
           Welcome back, {user.fName}! Manage your job listings and candidates.
         </p>
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-5 md:mb-8">
         <div className="stat-card">
           <div className="stat-value text-blue-600">{employerJobListings.length}</div>
-          <div className="stat-label">Active Listings</div>
+          <div className="stat-label">Listings</div>
         </div>
         <div className="stat-card">
           <div className="stat-value text-green-600">{receivedApplications.length}</div>
-          <div className="stat-label">Total Applications</div>
+          <div className="stat-label">Applications</div>
         </div>
         <div className="stat-card">
           <div className="stat-value text-yellow-600">{pendingCount}</div>
-          <div className="stat-label">Pending Review</div>
+          <div className="stat-label">Pending</div>
         </div>
         <div className="stat-card">
           <div className="stat-value text-purple-600">{interviewCount}</div>
-          <div className="stat-label">Interviews Scheduled</div>
+          <div className="stat-label">Interviews</div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         {/* Recent Applications */}
-        <div className="card p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Recent Applications</h2>
-            <Link to="/demo/employer/applications" className="text-primary-600 text-sm">
+        <div className="card p-4 md:p-6">
+          <div className="flex justify-between items-center mb-3 md:mb-4">
+            <h2 className="text-base md:text-xl font-semibold">Recent Applications</h2>
+            <Link to="/demo/employer/applications" className="text-primary-600 text-xs md:text-sm">
               View All
             </Link>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {receivedApplications.slice(0, 3).map((app) => (
-              <div key={app._id} className="app-item p-4 bg-secondary-50 rounded-lg">
+              <div key={app._id} className="app-item p-3 md:p-4 bg-secondary-50 rounded-lg">
                 <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-medium">
+                  <div className="flex-1 min-w-0 mr-2">
+                    <h4 className="font-medium text-sm md:text-base truncate">
                       {app.candidate.fName} {app.candidate.lName}
                     </h4>
-                    <p className="text-sm text-secondary-600">
-                      Applied for: {app.jobListing.jobTitle}
+                    <p className="text-xs md:text-sm text-secondary-600 truncate">
+                      {app.jobListing.jobTitle}
                     </p>
                     <p className="text-xs text-secondary-500 mt-1">
                       {new Date(app.appliedDate).toLocaleDateString()}
                     </p>
                   </div>
-                  <span className={`status-badge status-${app.status}`}>
+                  <span className={`status-badge status-${app.status} flex-shrink-0`}>
                     {app.status.replace(/_/g, ' ')}
                   </span>
                 </div>
@@ -76,23 +76,23 @@ const DemoEmployerDashboard = () => {
         </div>
 
         {/* Top Matches */}
-        <div className="card p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Top Candidate Matches</h2>
-            <Link to="/demo/employer/candidates" className="text-primary-600 text-sm">
+        <div className="card p-4 md:p-6">
+          <div className="flex justify-between items-center mb-3 md:mb-4">
+            <h2 className="text-base md:text-xl font-semibold">Top Matches</h2>
+            <Link to="/demo/employer/candidates" className="text-primary-600 text-xs md:text-sm">
               View All
             </Link>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {employerMatches.map((match) => (
-              <div key={match._id} className="match-item p-4 bg-secondary-50 rounded-lg">
+              <div key={match._id} className="match-item p-3 md:p-4 bg-secondary-50 rounded-lg">
                 <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-medium">
+                  <div className="flex-1 min-w-0 mr-2">
+                    <h4 className="font-medium text-sm md:text-base truncate">
                       {match.candidate.fName} {match.candidate.lName}
                     </h4>
-                    <p className="text-sm text-secondary-600">
-                      For: {match.jobListing.jobTitle}
+                    <p className="text-xs md:text-sm text-secondary-600 truncate">
+                      {match.jobListing.jobTitle}
                     </p>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {match.matchedSkills.slice(0, 3).map((skill, i) => (
@@ -102,8 +102,8 @@ const DemoEmployerDashboard = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-lg font-bold text-green-600">
+                  <div className="text-right flex-shrink-0">
+                    <div className="text-base md:text-lg font-bold text-green-600">
                       {match.matchScore}%
                     </div>
                     <div className="text-xs text-secondary-500">Match</div>
@@ -115,12 +115,14 @@ const DemoEmployerDashboard = () => {
         </div>
 
         {/* Active Job Listings */}
-        <div className="card p-6 lg:col-span-2">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Active Job Listings</h2>
+        <div className="card p-4 md:p-6 lg:col-span-2">
+          <div className="flex justify-between items-center mb-3 md:mb-4">
+            <h2 className="text-base md:text-xl font-semibold">Active Listings</h2>
             <button className="btn-primary-sm">Post New Job</button>
           </div>
-          <div className="overflow-x-auto">
+
+          {/* Desktop table */}
+          <div className="overflow-x-auto hidden md:block">
             <table className="w-full">
               <thead>
                 <tr className="text-left text-secondary-600 text-sm">
@@ -154,6 +156,31 @@ const DemoEmployerDashboard = () => {
               </tbody>
             </table>
           </div>
+
+          {/* Mobile card view */}
+          <div className="md:hidden space-y-3">
+            {employerJobListings.map((job) => {
+              const jobApps = receivedApplications.filter(
+                a => a.jobListing._id === job._id
+              ).length;
+              return (
+                <div key={job._id} className="p-3 bg-secondary-50 rounded-lg">
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex-1 min-w-0 mr-2">
+                      <h4 className="font-medium text-sm truncate">{job.jobTitle}</h4>
+                      <p className="text-xs text-secondary-500">{job.companyName}</p>
+                    </div>
+                    <span className="status-badge status-active flex-shrink-0">Active</span>
+                  </div>
+                  <div className="flex gap-3 text-xs text-secondary-600">
+                    <span>{job.type}</span>
+                    <span>${parseInt(job.startingPay).toLocaleString()}</span>
+                    <span>{jobApps} apps</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -177,14 +204,26 @@ const DemoEmployerDashboard = () => {
         }
 
         .stat-value {
-          font-size: 2rem;
+          font-size: 1.5rem;
           font-weight: 700;
         }
 
+        @media (min-width: 768px) {
+          .stat-value {
+            font-size: 2rem;
+          }
+        }
+
         .stat-label {
-          font-size: 0.875rem;
+          font-size: 0.75rem;
           color: #666;
           margin-top: 0.25rem;
+        }
+
+        @media (min-width: 768px) {
+          .stat-label {
+            font-size: 0.875rem;
+          }
         }
 
         .status-badge {

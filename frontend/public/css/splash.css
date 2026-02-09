@@ -137,3 +137,34 @@
         top: -1000px;
     }
 }
+
+@media all and (max-width: 767px) {
+    .splash-title {
+        font-size: 2rem;
+        margin-left: 1rem;
+    }
+
+    .intro-text {
+        font-size: 1rem;
+        margin-left: 1rem;
+        top: 100px;
+    }
+
+    .exp-text {
+        font-size: 1.25rem;
+    }
+
+    .splash-image {
+        width: 80vw;
+        left: 10vw;
+        top: 30vh;
+        margin-left: 0;
+    }
+
+    .splash-auth-buttons {
+        left: 5vw;
+        top: 60vh;
+        margin-left: 1rem;
+        width: 80vw;
+    }
+}

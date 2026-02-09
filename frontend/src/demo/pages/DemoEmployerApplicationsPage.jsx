@@ -22,10 +22,10 @@ const DemoEmployerApplicationsPage = () => {
   };
 
   return (
-    <div className="applications-container p-6 max-w-6xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">Received Applications</h1>
-        <p className="text-secondary-600">
+    <div className="applications-container p-4 md:p-6 max-w-6xl mx-auto">
+      <div className="mb-4 md:mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Received Applications</h1>
+        <p className="text-secondary-600 text-sm md:text-base">
           Review and manage applications from candidates
         </p>
       </div>
@@ -59,60 +59,63 @@ const DemoEmployerApplicationsPage = () => {
       </div>
 
       {/* Applications List */}
-      <div className="space-y-4">
+      <div className="space-y-3 md:space-y-4">
         {filteredApplications.map((app) => (
-          <div key={app._id} className="card p-6">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="avatar">
+          <div key={app._id} className="card p-4 md:p-6">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3 md:gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 md:gap-3 mb-2">
+                  <div className="avatar flex-shrink-0">
                     {app.candidate.fName[0]}{app.candidate.lName[0]}
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      {app.candidate.fName} {app.candidate.lName}
-                    </h3>
-                    <p className="text-secondary-600">{app.candidate.email}</p>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-semibold text-sm md:text-lg truncate">
+                        {app.candidate.fName} {app.candidate.lName}
+                      </h3>
+                      <span className="md:hidden flex-shrink-0">{getStatusBadge(app.status)}</span>
+                    </div>
+                    <p className="text-secondary-600 text-xs md:text-base truncate">{app.candidate.email}</p>
                   </div>
                 </div>
 
-                <div className="mt-4">
-                  <p className="text-sm text-secondary-500 mb-1">Applied for:</p>
-                  <p className="font-medium">{app.jobListing.jobTitle}</p>
+                <div className="mt-3">
+                  <p className="text-xs md:text-sm text-secondary-500 mb-0.5 md:mb-1">Applied for:</p>
+                  <p className="font-medium text-sm md:text-base">{app.jobListing.jobTitle}</p>
                 </div>
 
-                <div className="mt-4">
-                  <p className="text-sm text-secondary-500 mb-2">Skills:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {app.candidate.resume.jobSkills.split(', ').slice(0, 5).map((skill, i) => (
+                <div className="mt-3">
+                  <p className="text-xs md:text-sm text-secondary-500 mb-1 md:mb-2">Skills:</p>
+                  <div className="flex flex-wrap gap-1.5 md:gap-2">
+                    {app.candidate.resume.jobSkills.split(', ').slice(0, 4).map((skill, i) => (
                       <span key={i} className="skill-badge">{skill}</span>
                     ))}
-                    {app.candidate.resume.jobSkills.split(', ').length > 5 && (
+                    {app.candidate.resume.jobSkills.split(', ').length > 4 && (
                       <span className="skill-badge">
-                        +{app.candidate.resume.jobSkills.split(', ').length - 5} more
+                        +{app.candidate.resume.jobSkills.split(', ').length - 4} more
                       </span>
                     )}
                   </div>
                 </div>
 
                 {app.notes && (
-                  <div className="mt-4 p-3 bg-secondary-50 rounded-lg">
-                    <p className="text-sm text-secondary-600">{app.notes}</p>
+                  <div className="mt-3 p-2 md:p-3 bg-secondary-50 rounded-lg">
+                    <p className="text-xs md:text-sm text-secondary-600 line-clamp-2">{app.notes}</p>
                   </div>
                 )}
               </div>
 
-              <div className="flex flex-col items-end gap-3">
-                {getStatusBadge(app.status)}
-                <div className="text-sm text-secondary-500">
+              <div className="flex flex-row md:flex-col items-center md:items-end gap-2 md:gap-3 mt-1 md:mt-0">
+                <span className="hidden md:inline-block">{getStatusBadge(app.status)}</span>
+                <div className="text-xs md:text-sm text-secondary-500">
                   Applied: {new Date(app.appliedDate).toLocaleDateString()}
                 </div>
                 {app.interviewDate && (
-                  <div className="text-sm text-green-600 font-medium">
+                  <div className="text-xs md:text-sm text-green-600 font-medium">
                     Interview: {new Date(app.interviewDate).toLocaleDateString()}
                   </div>
                 )}
-                <div className="flex gap-2 mt-2">
+                <div className="flex gap-2 ml-auto md:ml-0 md:mt-2">
                   <button className="btn-primary-sm">View Resume</button>
                   <button className="btn-secondary-sm">Message</button>
                 </div>
@@ -142,19 +145,41 @@ const DemoEmployerApplicationsPage = () => {
         .filter-tabs {
           display: flex;
           gap: 0.5rem;
-          flex-wrap: wrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding-bottom: 0.25rem;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+          display: none;
         }
 
         .filter-tab {
-          padding: 0.5rem 1rem;
+          padding: 0.5rem 0.75rem;
           border-radius: 9999px;
           background: #f3f4f6;
           color: #666;
-          font-size: 0.875rem;
+          font-size: 0.75rem;
           font-weight: 500;
           cursor: pointer;
           border: none;
           transition: all 0.2s;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+          .filter-tabs {
+            flex-wrap: wrap;
+            overflow-x: visible;
+          }
+
+          .filter-tab {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+          }
         }
 
         .filter-tab:hover {

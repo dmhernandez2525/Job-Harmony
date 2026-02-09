@@ -110,3 +110,38 @@
 .resume-submit-button:hover{
     background-color: whitesmoke;
 }
+
+@media all and (max-width: 767px) {
+    .resume-form-container {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        padding-top: 56px;
+        padding-bottom: 6rem;
+    }
+
+    .resume-form {
+        width: 100%;
+        height: auto;
+    }
+
+    .job-field-div,
+    .job-history-div,
+    .job-skills-div {
+        flex-direction: column;
+        height: auto;
+        gap: 0.5rem;
+    }
+
+    .job-field-input,
+    .job-history-input,
+    .job-skills-input {
+        width: 100%;
+    }
+
+    .job-field-txt,
+    .job-history-txt,
+    .job-skills-txt {
+        font-size: 16px;
+    }
+}

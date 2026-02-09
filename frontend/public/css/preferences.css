@@ -35,3 +35,20 @@
     margin-top: 15px;
     width: 80%;
 }
+
+@media all and (max-width: 767px) {
+    .preference-form-container {
+        padding: 1rem;
+        top: 44px;
+        padding-bottom: 6rem;
+    }
+
+    .prefs-form {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .prefs-input {
+        width: 100%;
+    }
+}

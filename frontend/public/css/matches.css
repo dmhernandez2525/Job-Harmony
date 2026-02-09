@@ -16,3 +16,16 @@
     margin-bottom: 20px;
     font-size: 30px;
 }
+
+@media all and (max-width: 767px) {
+    .matches-index-container {
+        width: 100%;
+        margin-top: 60px;
+        padding: 1rem;
+        height: auto;
+    }
+
+    .matches-index-container h2 {
+        font-size: 1.25rem;
+    }
+}

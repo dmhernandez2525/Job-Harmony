@@ -147,3 +147,53 @@
     width: 250px;
     height: 30px;
 }
+
+@media all and (max-width: 767px) {
+    .onepage-form-container {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        padding-top: 56px;
+        padding-bottom: 6rem;
+    }
+
+    .onepage-form {
+        width: 100%;
+        height: auto;
+        padding: 0.75rem;
+    }
+
+    .company-name-div,
+    .job-title-div,
+    .job-description-div,
+    .job-type-div,
+    .job-remote-div,
+    .job-benefits-div,
+    .starting-pay-div {
+        flex-direction: column;
+        height: auto;
+        align-items: flex-start;
+        gap: 0.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .company-name-text,
+    .job-title-text,
+    .job-description-text,
+    .job-type-text,
+    .job-remote-text,
+    .job-benefits-text,
+    .starting-pay-text {
+        font-size: 14px;
+    }
+
+    .company-name-input,
+    .job-title-input,
+    .job-description-input,
+    .job-type-input,
+    .job-remote-input,
+    .job-benefits-input,
+    .starting-pay-input {
+        width: 100%;
+    }
+}

@@ -31,7 +31,7 @@ const DemoNavbar = () => {
   };
 
   return (
-    <div className="nav-bar-user">
+    <div className="nav-bar-user demo-navbar-desktop">
       <div className="navbar-left">
         <Link className="nav-image" to="/demo">
           <img className="nav-image" src={logo} alt="Job Harmony Logo" />

@@ -80,3 +80,17 @@ button#demo:hover{
   color: gray;
   background: whitesmoke
 }
+
+@media all and (max-width: 767px) {
+  .signup-form,
+  .login-form {
+    width: 100%;
+    max-width: 320px;
+    padding: 20px;
+  }
+
+  .signup-form input,
+  .login-form input {
+    width: 100%;
+  }
+}
