@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useDemoContext, DEMO_ROLES } from '../DemoContext';
 import DemoNavbar from './DemoNavbar';
 import DemoEmployerNavbar from './DemoEmployerNavbar';
+import DemoBottomNav from './DemoBottomNav';
 
 const DemoLayout = () => {
   const { demoRole, isEnvDemoMode } = useDemoContext();
@@ -70,6 +71,7 @@ const DemoLayout = () => {
       <main className="demo-content">
         <Outlet />
       </main>
+      <DemoBottomNav />
       <style>{`
         .demo-layout {
           min-height: 100vh;
@@ -78,6 +80,13 @@ const DemoLayout = () => {
 
         .demo-content {
           padding-top: 1rem;
+          padding-bottom: 5rem;
+        }
+
+        @media (min-width: 768px) {
+          .demo-content {
+            padding-bottom: 0;
+          }
         }
       `}</style>
     </div>

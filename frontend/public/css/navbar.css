@@ -171,5 +171,58 @@ i {
 
 .my-matches-btn, .username-btn{
   font-size: 18px;
-  
+
+}
+
+/* Mobile: compact the navbar */
+@media all and (max-width: 767px) {
+  .nav-bar-user {
+    height: 44px;
+    padding: 0 0.5rem;
+  }
+
+  .navbar-left {
+    padding-left: 8px;
+  }
+
+  .navbar-right {
+    gap: 0;
+  }
+
+  .session-btn {
+    width: auto;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .my-profile-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .my-matches-btn,
+  .username-btn {
+    font-size: 12px;
+  }
+
+  .user-name-bar {
+    width: auto;
+    padding-left: 8px;
+    font-size: 12px;
+  }
+
+  .log-in-nav {
+    font-size: 14px;
+  }
+
+  .dropdown-items {
+    width: 200px;
+    height: auto;
+    right: 0;
+  }
+
+  #dropdown li {
+    padding: 12px;
+    font-size: 14px;
+  }
 }

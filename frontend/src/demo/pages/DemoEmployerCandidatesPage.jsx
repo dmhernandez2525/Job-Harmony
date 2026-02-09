@@ -26,16 +26,16 @@ const DemoEmployerCandidatesPage = () => {
   };
 
   return (
-    <div className="candidates-container p-6 max-w-6xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">Candidate Pool</h1>
-        <p className="text-secondary-600">
+    <div className="candidates-container p-4 md:p-6 max-w-6xl mx-auto">
+      <div className="mb-4 md:mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Candidate Pool</h1>
+        <p className="text-secondary-600 text-sm md:text-base">
           Browse and connect with potential candidates
         </p>
       </div>
 
       {/* Candidates Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
         {candidatesWithScores.map((candidate) => (
           <div key={candidate._id} className="card candidate-card">
             <div className="card-header">

@@ -353,4 +353,71 @@
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
+
+  /* Mobile bottom nav clearance */
+  .mobile-body-padding {
+    padding-bottom: 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-body-padding {
+      padding-bottom: 0;
+    }
+  }
+}
+
+/* Bottom nav slide-up animation */
+@keyframes slideUpNav {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpSheet {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInOverlay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-slide-up-nav {
+  animation: slideUpNav 0.3s ease-out forwards;
+}
+
+.animate-slide-up-sheet {
+  animation: slideUpSheet 0.3s ease-out forwards;
+}
+
+.animate-fade-overlay {
+  animation: fadeInOverlay 0.2s ease-out forwards;
+}
+
+/* Hide desktop navbar on mobile, show on md+ */
+@media (max-width: 767px) {
+  .demo-navbar-desktop {
+    display: none !important;
+  }
+}
+
+/* Mobile-first: on mobile show a compact logo header for demo pages */
+@media (max-width: 767px) {
+  .demo-content {
+    padding-top: 0.5rem;
+  }
 }

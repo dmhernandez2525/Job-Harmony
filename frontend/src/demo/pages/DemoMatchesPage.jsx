@@ -24,62 +24,62 @@ const DemoMatchesPage = () => {
   }
 
   return (
-    <div className="matches-container p-6 max-w-4xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">Your Matches</h1>
-        <p className="text-secondary-600">
+    <div className="matches-container p-4 md:p-6 max-w-4xl mx-auto">
+      <div className="mb-4 md:mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Your Matches</h1>
+        <p className="text-secondary-600 text-sm md:text-base">
           These employers have shown interest in your profile!
         </p>
       </div>
 
-      <div className="grid gap-4">
+      <div className="grid gap-3 md:gap-4">
         {matches.map((match) => (
-          <div key={match._id} className="card p-6">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h2 className="text-xl font-semibold">
+          <div key={match._id} className="card p-4 md:p-6">
+            <div className="flex justify-between items-start mb-3 md:mb-4">
+              <div className="flex-1 min-w-0 mr-3">
+                <h2 className="text-base md:text-xl font-semibold truncate">
                   {match.jobListing.jobTitle}
                 </h2>
-                <p className="text-secondary-600">
+                <p className="text-secondary-600 text-sm">
                   at {match.jobListing.companyName}
                 </p>
               </div>
-              <div className="text-right">
+              <div className="text-right flex-shrink-0">
                 {getStatusBadge(match.status)}
-                <div className="mt-2 text-sm text-secondary-500">
+                <div className="mt-1 md:mt-2 text-xs md:text-sm text-secondary-500">
                   {match.matchScore}% match
                 </div>
               </div>
             </div>
 
-            <div className="mb-4">
-              <h4 className="text-sm font-medium text-secondary-700 mb-2">
+            <div className="mb-3 md:mb-4">
+              <h4 className="text-xs md:text-sm font-medium text-secondary-700 mb-1 md:mb-2">
                 Matched Skills:
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 md:gap-2">
                 {match.matchedSkills.map((skill, i) => (
-                  <span key={i} className="badge-secondary">
+                  <span key={i} className="badge-secondary text-xs">
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="flex gap-4 mt-4">
-              <p className="text-sm text-secondary-600">
+            <div className="flex flex-wrap gap-2 md:gap-4 mt-3 md:mt-4 text-xs md:text-sm text-secondary-600">
+              <p>
                 <strong>Salary:</strong> ${parseInt(match.jobListing.startingPay).toLocaleString()}
               </p>
-              <p className="text-sm text-secondary-600">
+              <p>
                 <strong>Type:</strong> {match.jobListing.type}
               </p>
-              <p className="text-sm text-secondary-600">
+              <p>
                 <strong>Remote:</strong> {match.jobListing.remote ? 'Yes' : 'No'}
               </p>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-secondary-200">
-              <button className="btn-primary mr-2">Send Message</button>
-              <button className="btn-secondary">View Details</button>
+            <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-secondary-200 flex gap-2">
+              <button className="btn-primary text-xs md:text-sm flex-1 md:flex-none">Send Message</button>
+              <button className="btn-secondary text-xs md:text-sm flex-1 md:flex-none">View Details</button>
             </div>
           </div>
         ))}

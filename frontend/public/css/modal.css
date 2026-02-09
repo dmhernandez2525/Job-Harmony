@@ -8,9 +8,17 @@
   z-index: 11;
 }
 .modal-content {
-  
+
   position: absolute;
   top: 360px;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media all and (max-width: 767px) {
+  .modal-content {
+    top: 50%;
+    width: 90%;
+    max-width: 350px;
+  }
 }
