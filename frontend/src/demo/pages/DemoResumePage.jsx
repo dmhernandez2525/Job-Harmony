@@ -54,7 +54,7 @@ const DemoResumePage = () => {
         {/* Preferences Section */}
         <div className="resume-section">
           <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-primary-600">Job Preferences</h3>
-          <div className="grid grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
             <div className="preference-item">
               <label className="text-xs md:text-sm text-secondary-500">Desired Field</label>
               <p className="font-medium text-sm md:text-base">{user.preference?.jobField || 'Open'}</p>
