@@ -1,0 +1,32 @@
+# Jarvis Resume File
+# Project map + session resume commands.
+# Root-level context for Job-Harmony.
+
+# ============================================================
+# FILE TREE (updated 2026-03-29)
+# ============================================================
+# ~/Desktop/Projects/Job-Harmony/
+# ├── __tests__/           # 4 test files
+# ├── config/              # DB, keys, passport
+# ├── docs/                # Architecture, roadmap, SDDs
+# │   ├── checklists/
+# │   ├── research/
+# │   └── sdd/
+# ├── frontend/            # React + Vite
+# │   ├── public/
+# │   └── src/
+# ├── models/
+# ├── routes/
+# ├── services/
+# └── ... (config, package.json, server.js)
+
+# ============================================================
+# SESSION HISTORY
+# ============================================================
+
+# --- Session (2026-03-29) ---
+# Session: Mega-Audit pass (no direct work on this project)
+# This file was created during the Full Ecosystem Mega-Audit.
+# Job-Harmony had no uncommitted changes (clean git status).
+# Last commit: Feb 8, 2026 (dormant, 49 days).
+claude --resume a99d0f28-cf4b-4443-afda-d96189eaa13c
